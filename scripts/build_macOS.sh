@@ -41,6 +41,8 @@ cd faiss &&
         -DOpenMP_CXX_FLAGS="-Xclang -fopenmp -Wno-unused-command-line-argument" \
         -DOpenMP_CXX_LIB_NAMES="libomp" \
         -DOpenMP_libomp_LIBRARY="omp" \
+        -DCMAKE_CXX_FLAGS="-L /usr/local/lib" \
+        -DCMAKE_CXX_FLAGS="-I /usr/local/include" \
         -DFAISS_ENABLE_GPU=OFF \
         -DFAISS_ENABLE_PYTHON=OFF \
         -DBUILD_TESTING=OFF \
