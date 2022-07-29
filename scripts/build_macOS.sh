@@ -16,35 +16,37 @@ brew install swig
 # Build libomp
 echo "Building libomp"
 git clone \
-        --depth 1 \
-        --filter=blob:none \
-        --sparse \
-        --branch ${LLVM_VERSION} \
-        https://github.com/llvm/llvm-project.git && \
-    cd llvm-project && \
-    git sparse-checkout set openmp && \
-    cd openmp && \
+    --depth 1 \
+    --filter=blob:none \
+    --sparse \
+    --branch ${LLVM_VERSION} \
+    https://github.com/llvm/llvm-project.git &&
+    cd llvm-project &&
+    git sparse-checkout set openmp &&
+    cd openmp &&
     cmake . \
         -B build \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_OSX_ARCHITECTURES=${TARGET_ARCH} \
-        -DLIBOMP_ENABLE_SHARED=OFF && \
-    cmake --build build -j && \
-    cmake --install build && \
+        -DLIBOMP_ENABLE_SHARED=OFF &&
+    cmake --build build -j &&
+    cmake --install build &&
     cd ../..
 
 # Build and patch faiss
 echo "Building faiss"
-cd faiss && \
+cd faiss &&
     cmake . \
         -B build \
+        -DOpenMP_CXX_FLAGS="-fopenmp=libomp -Wno-unused-command-line-argument" \
+        -DOpenMP_CXX_LIB_NAMES="libomp" \
         -DFAISS_ENABLE_GPU=OFF \
         -DFAISS_ENABLE_PYTHON=OFF \
         -DBUILD_TESTING=OFF \
         -DFAISS_OPT_LEVEL=${FAISS_OPT_LEVEL} \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_OSX_ARCHITECTURES=${TARGET_ARCH} && \
-    cmake --build build --config Release -j -v && \
-    cmake --install build && \
-    mv faiss/python/swigfaiss.swig faiss/python/swigfaiss.i && \
+        -DCMAKE_OSX_ARCHITECTURES=${TARGET_ARCH} &&
+    cmake --build build --config Release -j -v &&
+    cmake --install build &&
+    mv faiss/python/swigfaiss.swig faiss/python/swigfaiss.i &&
     cd ..
