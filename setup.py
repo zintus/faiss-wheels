@@ -4,7 +4,7 @@ from setuptools.command.build_py import build_py
 import sys
 import os
 
-NAME = 'faiss-cpu'
+NAME = 'faiss-gpu'
 VERSION = '1.7.2'
 
 LONG_DESCRIPTION = """
