@@ -40,6 +40,7 @@ cd faiss &&
         -B build \
         -DOpenMP_CXX_FLAGS="-fopenmp=libomp -Wno-unused-command-line-argument" \
         -DOpenMP_CXX_LIB_NAMES="libomp" \
+        -DOpenMP_libomp_LIBRARY="omp" \
         -DFAISS_ENABLE_GPU=OFF \
         -DFAISS_ENABLE_PYTHON=OFF \
         -DBUILD_TESTING=OFF \
