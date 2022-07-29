@@ -38,7 +38,7 @@ echo "Building faiss"
 cd faiss &&
     cmake . \
         -B build \
-        -DOpenMP_CXX_FLAGS="-Xclang -fopenmp=libomp -Wno-unused-command-line-argument" \
+        -DOpenMP_CXX_FLAGS="-Xclang -fopenmp -Wno-unused-command-line-argument" \
         -DOpenMP_CXX_LIB_NAMES="libomp" \
         -DOpenMP_libomp_LIBRARY="omp" \
         -DFAISS_ENABLE_GPU=OFF \
