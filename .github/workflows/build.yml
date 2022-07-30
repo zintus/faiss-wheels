@@ -36,15 +36,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-10.15]
-        arch: [auto64]
-        gpu: [OFF]
         include:
           - os: ubuntu-20.04
             arch: aarch64
             gpu: OFF
           - os: macos-10.15
             arch: arm64
+            gpu: OFF
+          - os: macos-10.15
+            arch: auto64
             gpu: OFF
           - os: ubuntu-20.04
             arch: auto64
